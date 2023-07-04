@@ -2487,6 +2487,25 @@
       "points": 10,
       "question": "What's the output?",
       "updatedAt": "2023-06-26T14:00:24.562Z"
+    },
+    {
+      "question": "Que vino antes el huevo o la gallina?",
+      "options": [
+        {
+          "S": "El huevo"
+        },
+        {
+          "S": "La gallina"
+        }
+      ],
+      "correctOption": 1,
+      "points": 10,
+      "code": "Ninguno",
+      "answer": "Pues no se sabe aun",
+      "id": "e727c777-1f8b-4fe5-8f24-f2ba49c41c1d",
+      "__typename": "Question",
+      "createdAt": "7/4/2023, 11:41:46 AM",
+      "updatedAt": "7/4/2023, 11:41:46 AM"
     }
   ]
 }
