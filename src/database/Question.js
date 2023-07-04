@@ -17,4 +17,11 @@ const createNewQuestion = (newQuestion) => {
   saveToDatabase(DB);
   return newQuestion;
 };
-module.exports = { getAllQuestions, createNewQuestion };
+
+const getOneQuestion = (questionId) => {
+  const question = DB.questions.find((question) => question.id === questionId);
+  console.log(question);
+  if (!question) return;
+  return question;
+};
+module.exports = { getAllQuestions, createNewQuestion, getOneQuestion };

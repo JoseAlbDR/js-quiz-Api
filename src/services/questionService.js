@@ -6,8 +6,9 @@ const getAllQuestions = () => {
   return allQuestions;
 };
 
-const getOneQuestion = () => {
-  return;
+const getOneQuestion = (questionId) => {
+  const oneQuestion = Question.getOneQuestion(questionId);
+  return oneQuestion;
 };
 
 const createNewQuestion = (newQuestion) => {

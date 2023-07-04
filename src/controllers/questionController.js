@@ -6,8 +6,16 @@ const getAllQuestions = (req, res) => {
 };
 
 const getOneQuestion = (req, res) => {
-  const question = questionService.getOneQuestion();
-  res.send("Get one Question");
+  const {
+    params: { questionId },
+  } = req;
+
+  if (!questionId) {
+    return;
+  }
+
+  const question = questionService.getOneQuestion(questionId);
+  res.send({ status: "OK", data: question });
 };
 
 const createNewQuestion = (req, res) => {
