@@ -24,4 +24,28 @@ const getOneQuestion = (questionId) => {
   if (!question) return;
   return question;
 };
-module.exports = { getAllQuestions, createNewQuestion, getOneQuestion };
+
+const updateOneQuestion = (questionId, changes) => {
+  const indexForUpdate = DB.questions.findIndex(
+    (question) => question.id === questionId
+  );
+
+  if (indexForUpdate === -1) return;
+
+  const updatedQuestion = {
+    ...DB.questions[indexForUpdate],
+    ...changes,
+    updatedAt: new Date().toLocaleString("es-ES"),
+  };
+
+  DB.questions[indexForUpdate] = updatedQuestion;
+  saveToDatabase(DB);
+
+  return updatedQuestion;
+};
+module.exports = {
+  getAllQuestions,
+  createNewQuestion,
+  getOneQuestion,
+  updateOneQuestion,
+};

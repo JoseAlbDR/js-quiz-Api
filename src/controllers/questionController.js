@@ -45,8 +45,16 @@ const createNewQuestion = (req, res) => {
 };
 
 const updateOneQuestion = (req, res) => {
-  const updatedQuestion = questionService.updateOneQuestion();
-  res.send("Update Question");
+  const {
+    body,
+    params: { questionId },
+  } = req;
+
+  if (!questionId) return;
+
+  const updatedQuestion = questionService.updateOneQuestion(questionId, body);
+
+  res.send({ status: "OK", data: updatedQuestion });
 };
 
 const deleteOneQuestion = (req, res) => {

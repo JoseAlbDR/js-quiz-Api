@@ -16,15 +16,16 @@ const createNewQuestion = (newQuestion) => {
     ...newQuestion,
     id: uuid(),
     __typename: "Question",
-    createdAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
-    updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
+    createdAt: new Date().toLocaleString("en-ES"),
+    updatedAt: new Date().toLocaleString("en-ES"),
   };
   const createdQuestion = Question.createNewQuestion(questionToInsert);
   return createdQuestion;
 };
 
-const updateOneQuestion = () => {
-  return;
+const updateOneQuestion = (questionId, changes) => {
+  const updatedQuestion = Question.updateOneQuestion(questionId, changes);
+  return updatedQuestion;
 };
 
 const deleteOneQuestion = () => {

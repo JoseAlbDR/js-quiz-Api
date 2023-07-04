@@ -2495,7 +2495,7 @@
           "S": "El huevo"
         },
         {
-          "S": "La gallina"
+          "S": "La Gallina"
         }
       ],
       "correctOption": 1,
@@ -2505,7 +2505,7 @@
       "id": "e727c777-1f8b-4fe5-8f24-f2ba49c41c1d",
       "__typename": "Question",
       "createdAt": "7/4/2023, 11:41:46 AM",
-      "updatedAt": "7/4/2023, 11:41:46 AM"
+      "updatedAt": "4/7/2023, 15:29:17"
     }
   ]
 }
