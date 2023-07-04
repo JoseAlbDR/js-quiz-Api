@@ -14,12 +14,11 @@ const createNewQuestion = (req, res) => {
   const { body } = req;
 
   if (
-    !body.question ||
-    !body.options ||
-    !body.correctOption ||
-    !body.points ||
-    !body.code ||
-    !body.answer
+    (!body.question ||
+      !body.options ||
+      body.correctOption < 0 ||
+      body.correctOption > 3,
+    !body.points || !body.answer)
   ) {
     return;
   }
