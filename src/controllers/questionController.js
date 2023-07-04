@@ -27,9 +27,8 @@ const createNewQuestion = (req, res) => {
       body.correctOption < 0 ||
       body.correctOption > 3,
     !body.points || !body.answer)
-  ) {
+  )
     return;
-  }
 
   const newQuestion = {
     question: body.question,
@@ -58,8 +57,14 @@ const updateOneQuestion = (req, res) => {
 };
 
 const deleteOneQuestion = (req, res) => {
-  const deletedQuestion = questionService.deleteOneQuestion();
-  res.send("Delete Question");
+  const {
+    params: { questionId },
+  } = req;
+
+  if (!questionId) return;
+
+  questionService.deleteOneQuestion(questionId);
+  res.status(204).send({ status: "OK" });
 };
 
 module.exports = {

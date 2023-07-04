@@ -9,9 +9,7 @@ const createNewQuestion = (newQuestion) => {
     (question) => question.answer === newQuestion.answer > -1
   );
 
-  if (isAlreadyAdded) {
-    return;
-  }
+  if (isAlreadyAdded) return;
 
   DB.questions.push(newQuestion);
   saveToDatabase(DB);
@@ -43,9 +41,22 @@ const updateOneQuestion = (questionId, changes) => {
 
   return updatedQuestion;
 };
+
+const deleteOneQuestion = (questionId) => {
+  const indexForDelete = DB.questions.findIndex(
+    (question) => question.id === questionId
+  );
+
+  if (indexForDelete === -1) return;
+
+  DB.questions.splice(indexForDelete, 1);
+  saveToDatabase(DB);
+};
+
 module.exports = {
   getAllQuestions,
   createNewQuestion,
   getOneQuestion,
   updateOneQuestion,
+  deleteOneQuestion,
 };

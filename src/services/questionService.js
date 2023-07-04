@@ -28,8 +28,8 @@ const updateOneQuestion = (questionId, changes) => {
   return updatedQuestion;
 };
 
-const deleteOneQuestion = () => {
-  return;
+const deleteOneQuestion = (questionId) => {
+  Question.deleteOneQuestion(questionId);
 };
 
 module.exports = {
