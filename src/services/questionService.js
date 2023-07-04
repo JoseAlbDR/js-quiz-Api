@@ -16,8 +16,8 @@ const createNewQuestion = (newQuestion) => {
     ...newQuestion,
     id: uuid(),
     __typename: "Question",
-    createdAt: new Date().toLocaleString("en-ES"),
-    updatedAt: new Date().toLocaleString("en-ES"),
+    createdAt: new Date().toLocaleString("es-ES"),
+    updatedAt: new Date().toLocaleString("es-ES"),
   };
   const createdQuestion = Question.createNewQuestion(questionToInsert);
   return createdQuestion;
