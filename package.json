@@ -1,0 +1,24 @@
+{
+  "name": "js-quiz-api",
+  "version": "1.0.0",
+  "description": "Api for jsQuiz Questions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseAlbDR/js-quiz-Api.git"
+  },
+  "keywords": [
+    "API",
+    "REST",
+    "JAVASCRIPT"
+  ],
+  "author": "J.Alberto Delgado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoseAlbDR/js-quiz-Api/issues"
+  },
+  "homepage": "https://github.com/JoseAlbDR/js-quiz-Api#readme"
+}
