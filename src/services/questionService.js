@@ -1,4 +1,5 @@
 const Question = require("../database/Question");
+const { v4: uuid } = require("uuid");
 
 const getAllQuestions = () => {
   const allQuestions = Question.getAllQuestions();
@@ -9,8 +10,16 @@ const getOneQuestion = () => {
   return;
 };
 
-const createNewQuestion = () => {
-  return;
+const createNewQuestion = (newWorkout) => {
+  const workoutToInsert = {
+    ...newWorkout,
+    id: uuid(),
+    __typename: "Question",
+    createdAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
+    updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
+  };
+  const createdQuestion = Question.createNewQuestion(workoutToInsert);
+  return createdQuestion;
 };
 
 const updateOneQuestion = () => {
