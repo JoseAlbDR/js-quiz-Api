@@ -20,3 +20,5 @@ router.patch("/:questionId", (req, res) => {
 router.delete("/:questionId", (req, res) => {
   res.send("Delete Question");
 });
+
+module.exports = router;
