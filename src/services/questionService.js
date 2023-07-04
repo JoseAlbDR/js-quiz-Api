@@ -19,8 +19,12 @@ const createNewQuestion = (newQuestion) => {
     createdAt: new Date().toLocaleString("es-ES"),
     updatedAt: new Date().toLocaleString("es-ES"),
   };
-  const createdQuestion = Question.createNewQuestion(questionToInsert);
-  return createdQuestion;
+  try {
+    const createdQuestion = Question.createNewQuestion(questionToInsert);
+    return createdQuestion;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const updateOneQuestion = (questionId, changes) => {
