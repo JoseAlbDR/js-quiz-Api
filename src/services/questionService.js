@@ -10,15 +10,15 @@ const getOneQuestion = () => {
   return;
 };
 
-const createNewQuestion = (newWorkout) => {
-  const workoutToInsert = {
-    ...newWorkout,
+const createNewQuestion = (newQuestion) => {
+  const questionToInsert = {
+    ...newQuestion,
     id: uuid(),
     __typename: "Question",
     createdAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
     updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
   };
-  const createdQuestion = Question.createNewQuestion(workoutToInsert);
+  const createdQuestion = Question.createNewQuestion(questionToInsert);
   return createdQuestion;
 };
 
