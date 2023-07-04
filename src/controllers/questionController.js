@@ -20,15 +20,15 @@ const getOneQuestion = (req, res) => {
 
 const createNewQuestion = (req, res) => {
   const { body } = req;
-  console.log(body);
+
   if (
-    !+body.correctOption > 0 ||
-    !+body.correctOption < 3 ||
+    +body.correctOption < 0 ||
+    +body.correctOption > 3 ||
     !body.question ||
     !body.options ||
-    !body.points
+    !body.points ||
+    !body.answer
   ) {
-    console.log("error");
     res.status(400).send({
       status: "FAILED",
       data: {
@@ -48,8 +48,14 @@ const createNewQuestion = (req, res) => {
     answer: body.answer,
   };
 
-  const createdQuestion = questionService.createNewQuestion(newQuestion);
-  res.status(201).send({ status: "OK", data: createdQuestion });
+  try {
+    const createdQuestion = questionService.createNewQuestion(newQuestion);
+    res.status(201).send({ status: "OK", data: createdQuestion });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
 };
 
 const updateOneQuestion = (req, res) => {
