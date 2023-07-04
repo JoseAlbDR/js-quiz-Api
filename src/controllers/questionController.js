@@ -10,11 +10,11 @@ const createNewQuestion = (req, res) => {
   res.send("Create Question");
 };
 
-const updateQuestion = (req, res) => {
+const updateOneQuestion = (req, res) => {
   res.send("Update Question");
 };
 
-const deleteQuestion = (req, res) => {
+const deleteOneQuestion = (req, res) => {
   res.send("Delete Question");
 };
 
@@ -22,6 +22,6 @@ module.exports = {
   getAllQuestions,
   getOneQuestion,
   createNewQuestion,
-  updateQuestion,
-  deleteQuestion,
+  updateOneQuestion,
+  deleteOneQuestion,
 };
