@@ -11,8 +11,28 @@ const getOneQuestion = (req, res) => {
 };
 
 const createNewQuestion = (req, res) => {
-  const createdQuestion = questionService.createNewQuestion();
-  res.send("Create Question");
+  const { body } = req;
+
+  if (
+    !body.question ||
+    !body.options ||
+    !body.correctOption ||
+    !body.points ||
+    !body.code
+  ) {
+    return;
+  }
+
+  const newQuestion = {
+    question: body.question,
+    options: body.options,
+    correctOption: body.correctOption,
+    points: body.points,
+    code: body.code,
+  };
+
+  const createdQuestion = questionService.createNewQuestion(newQuestion);
+  res.status(201).send({ status: "OK", data: createdQuestion });
 };
 
 const updateOneQuestion = (req, res) => {
