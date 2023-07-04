@@ -2,7 +2,7 @@ const questionService = require("../services/questionService");
 
 const getAllQuestions = (req, res) => {
   const allQuestions = questionService.getAllQuestions();
-  res.send("Get all Questions");
+  res.send({ status: "OK", data: allQuestions });
 };
 
 const getOneQuestion = (req, res) => {
