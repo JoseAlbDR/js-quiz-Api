@@ -12,6 +12,10 @@ const createNewQuestion = (newQuestion) => {
 
   if (isAlreadyAdded) return;
 
+  try {
+  } catch (error) {
+    throw { status: 500, message: error?.message || error };
+  }
   DB.questions.push(newQuestion);
   saveToDatabase(DB);
   return newQuestion;
