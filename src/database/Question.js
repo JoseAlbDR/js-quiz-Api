@@ -5,9 +5,10 @@ const getAllQuestions = () => {
 };
 
 const createNewQuestion = (newQuestion) => {
-  const isAlreadyAdded = DB.questions.findIndex(
-    (question) => question.answer === newQuestion.answer > -1
-  );
+  const isAlreadyAdded =
+    DB.questions.findIndex(
+      (question) => question.answer === newQuestion.answer
+    ) > -1;
 
   if (isAlreadyAdded) return;
 
