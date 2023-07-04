@@ -9,8 +9,8 @@ router.get("/:questionId", questionController.getOneQuestion);
 
 router.post("/", questionController.createNewQuestion);
 
-router.patch("/:questionId", questionController.updateQuestion);
+router.patch("/:questionId", questionController.updateOneQuestion);
 
-router.delete("/:questionId", questionController.deleteQuestion);
+router.delete("/:questionId", questionController.deleteOneQuestion);
 
 module.exports = router;
