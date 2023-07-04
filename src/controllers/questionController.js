@@ -18,7 +18,8 @@ const createNewQuestion = (req, res) => {
     !body.options ||
     !body.correctOption ||
     !body.points ||
-    !body.code
+    !body.code ||
+    !body.answer
   ) {
     return;
   }
@@ -29,6 +30,7 @@ const createNewQuestion = (req, res) => {
     correctOption: body.correctOption,
     points: body.points,
     code: body.code,
+    answer: body.answer,
   };
 
   const createdQuestion = questionService.createNewQuestion(newQuestion);
