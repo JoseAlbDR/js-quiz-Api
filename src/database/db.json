@@ -2498,14 +2498,14 @@
           "S": "La Gallina"
         }
       ],
-      "correctOption": 1,
-      "points": 10,
+      "correctOption": 3,
+      "points": "10",
       "code": "Ninguno",
       "answer": "Pues no se sabe aun",
-      "id": "5f8a78bb-4603-48a9-9a2a-edeb7bbb62e6",
+      "id": "fb8fbe85-7388-464c-8a7c-285a720f286e",
       "__typename": "Question",
-      "createdAt": "4/7/2023, 15:41:35",
-      "updatedAt": "4/7/2023, 15:41:35"
+      "createdAt": "4/7/2023, 16:08:09",
+      "updatedAt": "4/7/2023, 16:08:09"
     }
   ]
 }

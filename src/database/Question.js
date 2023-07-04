@@ -10,15 +10,20 @@ const createNewQuestion = (newQuestion) => {
       (question) => question.answer === newQuestion.answer
     ) > -1;
 
-  if (isAlreadyAdded) return;
+  if (isAlreadyAdded) {
+    throw {
+      status: 400,
+      message: `Question with id:${newQuestion.id} already exsist in the database`,
+    };
+  }
 
   try {
+    DB.questions.push(newQuestion);
+    saveToDatabase(DB);
+    return newQuestion;
   } catch (error) {
     throw { status: 500, message: error?.message || error };
   }
-  DB.questions.push(newQuestion);
-  saveToDatabase(DB);
-  return newQuestion;
 };
 
 const getOneQuestion = (questionId) => {
