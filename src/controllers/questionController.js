@@ -20,15 +20,24 @@ const getOneQuestion = (req, res) => {
 
 const createNewQuestion = (req, res) => {
   const { body } = req;
-
+  console.log(body);
   if (
-    (!body.question ||
-      !body.options ||
-      body.correctOption < 0 ||
-      body.correctOption > 3,
-    !body.points || !body.answer)
-  )
+    !+body.correctOption > 0 ||
+    !+body.correctOption < 3 ||
+    !body.question ||
+    !body.options ||
+    !body.points
+  ) {
+    console.log("error");
+    res.status(400).send({
+      status: "FAILED",
+      data: {
+        error:
+          "One or more fields are missing or empty: 'question', 'options', 'points', 'answer'. correctOption cant be greater than 3 or lesser than 0",
+      },
+    });
     return;
+  }
 
   const newQuestion = {
     question: body.question,
