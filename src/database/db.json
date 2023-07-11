@@ -3,19 +3,19 @@
     {
       "id": "c72b3240-2b3e-4540-9791-09dcc9ae1c9f",
       "__typename": "Question",
-      "answer": "An async function always returns a promise. The await still has to wait for the promise to resolve: a pending promise gets returned when we call getData() in order to set data equal to it.\\n\\nIf we wanted to get access to the resolved value \"\"I made it\"\", we could have used the .then() method on data:\\n\\ndata.then(res => console.log(res))\\n\\nThis would've logged \"\"I made it!\"\"",
-      "code": "async function getData() {\\n  return await Promise.resolve('I made it!');\\n}\\n\\nconst data = getData();\\nconsole.log(data);",
-      "correctOption": 2,
-      "createdAt": "2023-06-26T13:46:47.645Z",
+      "answer": "typeof 1 returns \"\"number\"\". typeof \"\"number\"\" returns \"\"string\"\"",
+      "code": "console.log(typeof typeof 1);",
+      "correctOption": 1,
+      "createdAt": "4/20/2022, 2:21:56 PM",
       "options": [
         {
-          "S": "\"I made it!\""
+          "S": "number"
         },
         {
-          "S": "Promise {<resolved>: \"I made it!\"}"
+          "S": "string"
         },
         {
-          "S": "Promise {<pending>}"
+          "S": "object"
         },
         {
           "S": "undefined"
@@ -23,7 +23,7 @@
       ],
       "points": 10,
       "question": "What's the output?",
-      "updatedAt": "2023-06-26T13:46:47.645Z"
+      "updatedAt": "12/7/2023, 1:32:19"
     },
     {
       "id": "82528751-ed1c-47da-8544-ed3544117821",
@@ -2505,7 +2505,7 @@
       "id": "ad2275cc-b57d-46f4-865d-dd396d06c687",
       "__typename": "Question",
       "createdAt": "12/7/2023, 1:21:05",
-      "updatedAt": "12/7/2023, 1:21:05"
+      "updatedAt": "12/7/2023, 1:28:30"
     }
   ]
 }

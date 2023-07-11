@@ -19,7 +19,7 @@ const getOneQuestion = (req, res) => {
   if (!questionId) {
     res.status(400).send({
       status: "FAILED",
-      data: { error: "Parameter ':workoutId' can not be empty" },
+      data: { error: "Parameter ':questionId' can not be empty" },
     });
   }
 
@@ -81,7 +81,7 @@ const updateOneQuestion = (req, res) => {
   if (!questionId) {
     res.status(400).send({
       status: "FAILED",
-      data: { error: "Parameter ':workoutId' can not be empty" },
+      data: { error: "Parameter ':questionId' can not be empty" },
     });
   }
 
@@ -93,8 +93,6 @@ const updateOneQuestion = (req, res) => {
       .status(error?.status || 500)
       .send({ status: "FAILED", data: { error: error?.message || error } });
   }
-
-  res.send({ status: "OK", data: updatedQuestion });
 };
 
 const deleteOneQuestion = (req, res) => {
@@ -105,7 +103,7 @@ const deleteOneQuestion = (req, res) => {
   if (!questionId) {
     res.status(400).send({
       status: "FAILED",
-      data: { error: "Parameter ':workoutId' can not be empty" },
+      data: { error: "Parameter ':questionId' can not be empty" },
     });
   }
 

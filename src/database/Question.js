@@ -39,7 +39,7 @@ const getOneQuestion = (questionId) => {
     if (!question) {
       throw {
         status: 400,
-        message: `Can't find workout with the id '${questionId}'`,
+        message: `Can't find question with the id '${questionId}'`,
       };
     }
 
@@ -58,7 +58,7 @@ const updateOneQuestion = (questionId, changes) => {
     if (indexForUpdate === -1) {
       throw {
         status: 400,
-        message: `Can't find workout with the id '${workoutId}'`,
+        message: `Can't find question with the id '${questionId}'`,
       };
     }
     const updatedQuestion = {
@@ -85,7 +85,7 @@ const deleteOneQuestion = (questionId) => {
     if (indexForDelete === -1) {
       throw {
         status: 400,
-        message: `Can't find workout with the id '${questionId}'`,
+        message: `Can't find question with the id '${questionId}'`,
       };
     }
 

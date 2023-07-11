@@ -19,12 +19,7 @@ router.delete("/:questionId", questionController.deleteOneQuestion);
  *   get:
  *     tags:
  *       - Questions
- *     parameters:
- *       - in: query
- *         name: mode
- *         schema:
- *           type: string
- *         description: The mode of a question
+ *     summary: Get All Questions
  *     responses:
  *       200:
  *         description: OK
@@ -59,16 +54,17 @@ router.delete("/:questionId", questionController.deleteOneQuestion);
  */
 /**
  * @openapi
- * /api/v1/questions/c72b3240-2b3e-4540-9791-09dcc9ae1c9f:
+ * /api/v1/questions/{questionId}:
  *   get:
  *     tags:
  *       - Questions
+ *     summary: Get One Question
  *     parameters:
- *       - in: query
- *         name: mode
+ *       - in: path
+ *         name: questionId
  *         schema:
  *           type: string
- *         description: The mode of a question
+ *         description: The id of a question
  *     responses:
  *       200:
  *         description: OK
@@ -123,7 +119,7 @@ router.delete("/:questionId", questionController.deleteOneQuestion);
  *   post:
  *     tags:
  *      - Questions
- *     summary: Create Question
+ *     summary: Create One Question
  *     operationId: createNewQuestion
  *     requestBody:
  *       content:
@@ -161,6 +157,73 @@ router.delete("/:questionId", questionController.deleteOneQuestion);
  *                     error:
  *                       type: string
  *                       example: "Question with id:c72b3240-2b3e-4540-9791-09dcc9ae1c9f already exsist in the database'"
+ *       5XX:
+ *         description: FAILED
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: FAILED
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: "Some error message"
+ */
+/**
+ * @openapi
+ * /api/v1/questions/{questionId}:
+ *   patch:
+ *     tags:
+ *      - Questions
+ *     summary: Update One Question
+ *     parameters:
+ *       - in: path
+ *         name: questionId
+ *         schema:
+ *           type: string
+ *         description: The id of a question
+ *     operationId: updateOneQuestion
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Question'
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: "#/components/schemas/Question"
+ *       400:
+ *         description: BAD REQUEST
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: FAILED
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: "Can't find question with the id c72b3240-2b3e-4540-9791-09dcc9ae1c9f"
  *       5XX:
  *         description: FAILED
  *         content:
