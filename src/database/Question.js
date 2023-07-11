@@ -85,7 +85,7 @@ const deleteOneQuestion = (questionId) => {
     if (indexForDelete === -1) {
       throw {
         status: 400,
-        message: `Can't find workout with the id '${workoutId}'`,
+        message: `Can't find workout with the id '${questionId}'`,
       };
     }
 

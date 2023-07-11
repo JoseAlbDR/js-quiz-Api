@@ -62,7 +62,6 @@ const createNewQuestion = (req, res) => {
     code: body.code,
     answer: body.answer,
   };
-
   try {
     const createdQuestion = questionService.createNewQuestion(newQuestion);
     res.status(201).send({ status: "OK", data: createdQuestion });
