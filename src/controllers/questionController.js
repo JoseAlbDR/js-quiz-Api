@@ -1,8 +1,14 @@
 const questionService = require("../services/questionService");
 
 const getAllQuestions = (req, res) => {
-  const allQuestions = questionService.getAllQuestions();
-  res.send({ status: "OK", data: allQuestions });
+  try {
+    const allQuestions = questionService.getAllQuestions();
+    res.send({ status: "OK", data: allQuestions });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
 };
 
 const getOneQuestion = (req, res) => {
@@ -11,11 +17,20 @@ const getOneQuestion = (req, res) => {
   } = req;
 
   if (!questionId) {
-    return;
+    res.status(400).send({
+      status: "FAILED",
+      data: { error: "Parameter ':workoutId' can not be empty" },
+    });
   }
 
-  const question = questionService.getOneQuestion(questionId);
-  res.send({ status: "OK", data: question });
+  try {
+    const question = questionService.getOneQuestion(questionId);
+    res.send({ status: "OK", data: question });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
 };
 
 const createNewQuestion = (req, res) => {
@@ -64,9 +79,21 @@ const updateOneQuestion = (req, res) => {
     params: { questionId },
   } = req;
 
-  if (!questionId) return;
+  if (!questionId) {
+    res.status(400).send({
+      status: "FAILED",
+      data: { error: "Parameter ':workoutId' can not be empty" },
+    });
+  }
 
-  const updatedQuestion = questionService.updateOneQuestion(questionId, body);
+  try {
+    const updatedQuestion = questionService.updateOneQuestion(questionId, body);
+    res.send({ status: "OK", data: updatedQuestion });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
 
   res.send({ status: "OK", data: updatedQuestion });
 };
@@ -76,10 +103,21 @@ const deleteOneQuestion = (req, res) => {
     params: { questionId },
   } = req;
 
-  if (!questionId) return;
+  if (!questionId) {
+    res.status(400).send({
+      status: "FAILED",
+      data: { error: "Parameter ':workoutId' can not be empty" },
+    });
+  }
 
-  questionService.deleteOneQuestion(questionId);
-  res.status(204).send({ status: "OK" });
+  try {
+    questionService.deleteOneQuestion(questionId);
+    res.status(204).send({ status: "OK" });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
 };
 
 module.exports = {
