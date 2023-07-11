@@ -52,6 +52,7 @@ router.delete("/:questionId", questionController.deleteOneQuestion);
  *                       type: string
  *                       example: "Some error message"
  */
+
 /**
  * @openapi
  * /api/v1/questions/{questionId}:
@@ -95,7 +96,7 @@ router.delete("/:questionId", questionController.deleteOneQuestion);
  *                   properties:
  *                     error:
  *                       type: string
- *                       example: "Can't find workout with the id 'c72b3240-2b3e-4540-9791-09dcc9ae1c9'"
+ *                       example: "Can't find question with the id '{questionId}'"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -113,6 +114,7 @@ router.delete("/:questionId", questionController.deleteOneQuestion);
  *                       type: string
  *                       example: "Some error message"
  */
+
 /**
  * @openapi
  * /api/v1/questions:
@@ -156,7 +158,7 @@ router.delete("/:questionId", questionController.deleteOneQuestion);
  *                   properties:
  *                     error:
  *                       type: string
- *                       example: "Question with id:c72b3240-2b3e-4540-9791-09dcc9ae1c9f already exsist in the database'"
+ *                       example: "Question with id:{questionId}f already exsist in the database'"
  *       5XX:
  *         description: FAILED
  *         content:
@@ -174,6 +176,7 @@ router.delete("/:questionId", questionController.deleteOneQuestion);
  *                       type: string
  *                       example: "Some error message"
  */
+
 /**
  * @openapi
  * /api/v1/questions/{questionId}:
@@ -223,7 +226,69 @@ router.delete("/:questionId", questionController.deleteOneQuestion);
  *                   properties:
  *                     error:
  *                       type: string
- *                       example: "Can't find question with the id c72b3240-2b3e-4540-9791-09dcc9ae1c9f"
+ *                       example: "Can't find question with the id {questionId}f"
+ *       5XX:
+ *         description: FAILED
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: FAILED
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: "Some error message"
+ */
+
+/**
+ *  @openapi
+ * /api/v1/questions/{questionId}:
+ *   delete:
+ *     tags:
+ *       - Questions
+ *     summary: Delete One Question
+ *     parameters:
+ *       - in: path
+ *         name: questionId
+ *         schema:
+ *           type: string
+ *         description: The id of a question
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: OK
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: "#/components/schemas/Question"
+ *       400:
+ *         description: BAD REQUEST
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: FAILED
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     error:
+ *                       type: string
+ *                       example: "Can't find question with the id '{questionId}'"
  *       5XX:
  *         description: FAILED
  *         content:
