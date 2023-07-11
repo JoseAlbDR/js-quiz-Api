@@ -1,7 +1,11 @@
 const DB = require("./db.json");
 const { saveToDatabase } = require("./utils");
 const getAllQuestions = () => {
-  return DB;
+  try {
+    return DB;
+  } catch (error) {
+    throw { status: 500, message: error };
+  }
 };
 
 const createNewQuestion = (newQuestion) => {
@@ -22,7 +26,7 @@ const createNewQuestion = (newQuestion) => {
     saveToDatabase(DB);
     return newQuestion;
   } catch (error) {
-    throw { status: 500, message: error?.message || error };
+    throw { status: error?.status, message: error?.message || error };
   }
 };
 
@@ -41,7 +45,7 @@ const getOneQuestion = (questionId) => {
 
     return question;
   } catch (error) {
-    throw { status: 500, message: error?.message || error };
+    throw { status: error?.status, message: error?.message || error };
   }
 };
 
@@ -68,7 +72,7 @@ const updateOneQuestion = (questionId, changes) => {
 
     return updatedQuestion;
   } catch (error) {
-    throw { status: 500, message: error?.message || error };
+    throw { status: error?.status, message: error?.message || error };
   }
 };
 
@@ -88,7 +92,7 @@ const deleteOneQuestion = (questionId) => {
     DB.questions.splice(indexForDelete, 1);
     saveToDatabase(DB);
   } catch (error) {
-    throw { status: 500, message: error?.message || error };
+    throw { status: error?.status, message: error?.message || error };
   }
 };
 
