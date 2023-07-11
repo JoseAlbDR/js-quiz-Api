@@ -27,40 +27,69 @@ const createNewQuestion = (newQuestion) => {
 };
 
 const getOneQuestion = (questionId) => {
-  const question = DB.questions.find((question) => question.id === questionId);
+  try {
+    const question = DB.questions.find(
+      (question) => question.id === questionId
+    );
 
-  if (!question) return;
-  return question;
+    if (!question) {
+      throw {
+        status: 400,
+        message: `Can't find workout with the id '${questionId}'`,
+      };
+    }
+
+    return question;
+  } catch (error) {
+    throw { status: 500, message: error?.message || error };
+  }
 };
 
 const updateOneQuestion = (questionId, changes) => {
-  const indexForUpdate = DB.questions.findIndex(
-    (question) => question.id === questionId
-  );
+  try {
+    const indexForUpdate = DB.questions.findIndex(
+      (question) => question.id === questionId
+    );
 
-  if (indexForUpdate === -1) return;
+    if (indexForUpdate === -1) {
+      throw {
+        status: 400,
+        message: `Can't find workout with the id '${workoutId}'`,
+      };
+    }
+    const updatedQuestion = {
+      ...DB.questions[indexForUpdate],
+      ...changes,
+      updatedAt: new Date().toLocaleString("es-ES"),
+    };
 
-  const updatedQuestion = {
-    ...DB.questions[indexForUpdate],
-    ...changes,
-    updatedAt: new Date().toLocaleString("es-ES"),
-  };
+    DB.questions[indexForUpdate] = updatedQuestion;
+    saveToDatabase(DB);
 
-  DB.questions[indexForUpdate] = updatedQuestion;
-  saveToDatabase(DB);
-
-  return updatedQuestion;
+    return updatedQuestion;
+  } catch (error) {
+    throw { status: 500, message: error?.message || error };
+  }
 };
 
 const deleteOneQuestion = (questionId) => {
-  const indexForDelete = DB.questions.findIndex(
-    (question) => question.id === questionId
-  );
+  try {
+    const indexForDelete = DB.questions.findIndex(
+      (question) => question.id === questionId
+    );
 
-  if (indexForDelete === -1) return;
+    if (indexForDelete === -1) {
+      throw {
+        status: 400,
+        message: `Can't find workout with the id '${workoutId}'`,
+      };
+    }
 
-  DB.questions.splice(indexForDelete, 1);
-  saveToDatabase(DB);
+    DB.questions.splice(indexForDelete, 1);
+    saveToDatabase(DB);
+  } catch (error) {
+    throw { status: 500, message: error?.message || error };
+  }
 };
 
 /**

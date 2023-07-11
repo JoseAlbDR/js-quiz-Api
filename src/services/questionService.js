@@ -7,8 +7,12 @@ const getAllQuestions = () => {
 };
 
 const getOneQuestion = (questionId) => {
-  const oneQuestion = Question.getOneQuestion(questionId);
-  return oneQuestion;
+  try {
+    const oneQuestion = Question.getOneQuestion(questionId);
+    return oneQuestion;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const createNewQuestion = (newQuestion) => {
@@ -28,12 +32,20 @@ const createNewQuestion = (newQuestion) => {
 };
 
 const updateOneQuestion = (questionId, changes) => {
-  const updatedQuestion = Question.updateOneQuestion(questionId, changes);
-  return updatedQuestion;
+  try {
+    const updatedQuestion = Question.updateOneQuestion(questionId, changes);
+    return updatedQuestion;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const deleteOneQuestion = (questionId) => {
-  Question.deleteOneQuestion(questionId);
+  try {
+    Question.deleteOneQuestion(questionId);
+  } catch (error) {
+    throw error;
+  }
 };
 
 module.exports = {
