@@ -1,9 +1,9 @@
-const Question = require("../database/questionModel");
+const Questions = require("../database/questionModel");
 const { v4: uuid } = require("uuid");
 
 const getAllQuestions = async () => {
   try {
-    const allQuestions = await Question.find({});
+    const allQuestions = await Questions.find({});
     return allQuestions;
   } catch (error) {
     throw { status: 500, message: error };
@@ -12,7 +12,7 @@ const getAllQuestions = async () => {
 
 const getOneQuestion = async (questionId) => {
   try {
-    const question = await Question.findOne({ _id: questionId });
+    const question = await Questions.findOne({ _id: questionId });
     console.log(question);
     if (!question) {
       throw {
@@ -35,7 +35,7 @@ const createNewQuestion = async (newQuestion) => {
   };
 
   try {
-    const isAlreadyAdded = Question.findOne({
+    const isAlreadyAdded = Questions.findOne({
       answer: questionToInsert.answer,
     });
 
@@ -46,7 +46,7 @@ const createNewQuestion = async (newQuestion) => {
       };
     }
 
-    const createdQuestion = await Question.create({ ...questionToInsert });
+    const createdQuestion = await Questions.create({ ...questionToInsert });
     return createdQuestion;
   } catch (error) {
     throw error;
@@ -55,10 +55,28 @@ const createNewQuestion = async (newQuestion) => {
 
 const updateOneQuestion = (questionId, changes) => {
   try {
-    const updatedQuestion = Question.updateOneQuestion(questionId, changes);
+    const indexForUpdate = Questions.findIndex(
+      (question) => question.id === questionId
+    );
+
+    if (indexForUpdate === -1) {
+      throw {
+        status: 400,
+        message: `Can't find question with the id '${questionId}'`,
+      };
+    }
+    const updatedQuestion = {
+      ...DB.questions[indexForUpdate],
+      ...changes,
+      updatedAt: new Date().toLocaleString("es-ES"),
+    };
+
+    DB.questions[indexForUpdate] = updatedQuestion;
+    saveToDatabase(DB);
+
     return updatedQuestion;
   } catch (error) {
-    throw error;
+    throw { status: error?.status, message: error?.message || error };
   }
 };
 
