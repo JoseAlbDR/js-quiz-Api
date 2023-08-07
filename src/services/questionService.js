@@ -1,48 +1,78 @@
-const Question = require("../database/Question");
+const Questions = require("../database/questionModel");
 const { v4: uuid } = require("uuid");
 
-const getAllQuestions = () => {
-  const allQuestions = Question.getAllQuestions();
-  return allQuestions;
-};
-
-const getOneQuestion = (questionId) => {
+const getAllQuestions = async () => {
   try {
-    const oneQuestion = Question.getOneQuestion(questionId);
-    return oneQuestion;
+    const allQuestions = await Questions.find({});
+    return allQuestions;
   } catch (error) {
-    throw error;
+    throw { status: 500, message: error };
   }
 };
 
-const createNewQuestion = (newQuestion) => {
+const getOneQuestion = async (questionId) => {
+  try {
+    const question = await Questions.findOne({ _id: questionId });
+
+    if (!question) {
+      throw {
+        status: 400,
+        message: `Can't find question with the id '${questionId}'`,
+      };
+    }
+
+    return question;
+  } catch (error) {
+    throw { status: error?.status || 400, message: error?.message || error };
+  }
+};
+
+const createNewQuestion = async (newQuestion) => {
   const questionToInsert = {
     ...newQuestion,
-    id: uuid(),
-    __typename: "Question",
     createdAt: new Date().toLocaleString("es-ES"),
     updatedAt: new Date().toLocaleString("es-ES"),
   };
+
   try {
-    const createdQuestion = Question.createNewQuestion(questionToInsert);
+    const isAlreadyAdded = await Questions.findOne({
+      answer: questionToInsert.answer,
+    });
+
+    if (isAlreadyAdded) {
+      throw {
+        status: 400,
+        message: `Question already exsist in the database`,
+      };
+    }
+
+    const createdQuestion = await Questions.create({ ...questionToInsert });
     return createdQuestion;
   } catch (error) {
     throw error;
   }
 };
 
-const updateOneQuestion = (questionId, changes) => {
+const updateOneQuestion = async (questionId, changes) => {
   try {
-    const updatedQuestion = Question.updateOneQuestion(questionId, changes);
+    const update = {
+      ...changes,
+      updatedAt: new Date().toLocaleString("es-ES"),
+    };
+
+    let updatedQuestion = await Questions.findByIdAndUpdate(questionId, update);
+
+    updatedQuestion = Questions.findOne(filter);
+
     return updatedQuestion;
   } catch (error) {
-    throw error;
+    throw { status: error?.status, message: error?.message || error };
   }
 };
 
-const deleteOneQuestion = (questionId) => {
+const deleteOneQuestion = async (questionId) => {
   try {
-    Question.deleteOneQuestion(questionId);
+    await Questions.findByIdAndDelete(questionId);
   } catch (error) {
     throw error;
   }
