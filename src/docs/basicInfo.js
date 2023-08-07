@@ -7,7 +7,7 @@ module.exports = {
     contact: {
       name: "J.Alberto Delgado", // your name
       email: "jaderodev.com", // your email
-      url: "jadelgadorobles.com", // your website
+      url: "https://www.jadelgadorobles.com", // your website
     },
   },
 };
