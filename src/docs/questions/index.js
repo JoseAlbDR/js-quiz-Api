@@ -1,19 +1,19 @@
-const getQuestions = require("./get-questions");
-const getQuestion = require("./get-question");
-const createQuestion = require("./create-question");
-const updateQuestion = require("./update-question");
-const deleteQuestion = require("./delete-question");
+const getAllQuestions = require("./get-questions");
+const getOneQuestion = require("./get-question");
+const createNewQuestion = require("./create-question");
+const updateOneQuestion = require("./update-question");
+const deleteOneQuestion = require("./delete-question");
 
 module.exports = {
   paths: {
-    "/api/v1/questions": {
-      ...getTodos,
-      ...createTodo,
+    "/": {
+      ...getAllQuestions,
+      ...createNewQuestion,
     },
-    "/api/v1/questions/{id}": {
-      ...getTodo,
-      ...updateTodo,
-      ...deleteTodo,
+    "/{questionId}": {
+      ...getOneQuestion,
+      ...updateOneQuestion,
+      ...deleteOneQuestion,
     },
   },
 };
