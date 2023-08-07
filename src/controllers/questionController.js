@@ -1,8 +1,9 @@
 const questionService = require("../services/questionService");
 
-const getAllQuestions = (req, res) => {
+const getAllQuestions = async (req, res) => {
   try {
-    const allQuestions = questionService.getAllQuestions();
+    const allQuestions = await questionService.getAllQuestions();
+    console.log(allQuestions);
     res.send({ status: "OK", data: allQuestions });
   } catch (error) {
     res
@@ -11,7 +12,7 @@ const getAllQuestions = (req, res) => {
   }
 };
 
-const getOneQuestion = (req, res) => {
+const getOneQuestion = async (req, res) => {
   const {
     params: { questionId },
   } = req;
@@ -24,7 +25,7 @@ const getOneQuestion = (req, res) => {
   }
 
   try {
-    const question = questionService.getOneQuestion(questionId);
+    const question = await questionService.getOneQuestion(questionId);
     res.send({ status: "OK", data: question });
   } catch (error) {
     res
@@ -33,7 +34,7 @@ const getOneQuestion = (req, res) => {
   }
 };
 
-const createNewQuestion = (req, res) => {
+const createNewQuestion = async (req, res) => {
   const { body } = req;
 
   if (
@@ -63,7 +64,9 @@ const createNewQuestion = (req, res) => {
     answer: body.answer,
   };
   try {
-    const createdQuestion = questionService.createNewQuestion(newQuestion);
+    const createdQuestion = await questionService.createNewQuestion(
+      newQuestion
+    );
     res.status(201).send({ status: "OK", data: createdQuestion });
   } catch (error) {
     res
