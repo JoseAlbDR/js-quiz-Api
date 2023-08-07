@@ -1,30 +1,52 @@
-const Question = require("../database/Question");
+const Question = require("../database/questionModel");
 const { v4: uuid } = require("uuid");
 
-const getAllQuestions = () => {
-  const allQuestions = Question.getAllQuestions();
-  return allQuestions;
-};
-
-const getOneQuestion = (questionId) => {
+const getAllQuestions = async () => {
   try {
-    const oneQuestion = Question.getOneQuestion(questionId);
-    return oneQuestion;
+    const allQuestions = await Question.find({});
+    return allQuestions;
   } catch (error) {
-    throw error;
+    throw { status: 500, message: error };
   }
 };
 
-const createNewQuestion = (newQuestion) => {
+const getOneQuestion = async (questionId) => {
+  try {
+    const question = await Question.findOne({ _id: questionId });
+    console.log(question);
+    if (!question) {
+      throw {
+        status: 400,
+        message: `Can't find question with the id '${questionId}'`,
+      };
+    }
+
+    return question;
+  } catch (error) {
+    throw { status: error?.status || 400, message: error?.message || error };
+  }
+};
+
+const createNewQuestion = async (newQuestion) => {
   const questionToInsert = {
     ...newQuestion,
-    id: uuid(),
-    __typename: "Question",
     createdAt: new Date().toLocaleString("es-ES"),
     updatedAt: new Date().toLocaleString("es-ES"),
   };
+
   try {
-    const createdQuestion = Question.createNewQuestion(questionToInsert);
+    const isAlreadyAdded = Question.findOne({
+      answer: questionToInsert.answer,
+    });
+
+    if (isAlreadyAdded) {
+      throw {
+        status: 400,
+        message: `Question already exsist in the database`,
+      };
+    }
+
+    const createdQuestion = await Question.create({ ...questionToInsert });
     return createdQuestion;
   } catch (error) {
     throw error;
