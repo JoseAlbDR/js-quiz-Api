@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const v1QuestionRouter = require("./v1/routes/questionRoutes");
 const { swaggerDocs: V1SwaggerDocs } = require("./v1/swagger");
+const dbConnect = require("./database/dbConnect");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,3 +14,5 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
   V1SwaggerDocs(app, PORT);
 });
+
+dbConnect();
