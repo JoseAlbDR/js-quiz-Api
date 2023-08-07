@@ -1,3 +1,7 @@
 module.exports = {
-  tags: {},
+  tags: [
+    {
+      name: "Questions CRUD operations",
+    },
+  ],
 };
