@@ -3,7 +3,7 @@ const questionService = require("../services/questionService");
 const getAllQuestions = async (req, res) => {
   try {
     const allQuestions = await questionService.getAllQuestions();
-    console.log(allQuestions);
+
     res.send({ status: "OK", data: allQuestions });
   } catch (error) {
     res
@@ -101,7 +101,7 @@ const updateOneQuestion = async (req, res) => {
   }
 };
 
-const deleteOneQuestion = (req, res) => {
+const deleteOneQuestion = async (req, res) => {
   const {
     params: { questionId },
   } = req;
@@ -114,8 +114,8 @@ const deleteOneQuestion = (req, res) => {
   }
 
   try {
-    questionService.deleteOneQuestion(questionId);
-    res.status(204).send({ status: "OK" });
+    await questionService.deleteOneQuestion(questionId);
+    res.status(204).send();
   } catch (error) {
     res
       .status(error?.status || 500)

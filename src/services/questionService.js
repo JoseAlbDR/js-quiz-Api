@@ -35,7 +35,7 @@ const createNewQuestion = async (newQuestion) => {
   };
 
   try {
-    const isAlreadyAdded = Questions.findOne({
+    const isAlreadyAdded = await Questions.findOne({
       answer: questionToInsert.answer,
     });
 
@@ -70,9 +70,9 @@ const updateOneQuestion = async (questionId, changes) => {
   }
 };
 
-const deleteOneQuestion = (questionId) => {
+const deleteOneQuestion = async (questionId) => {
   try {
-    Question.deleteOneQuestion(questionId);
+    await Questions.findByIdAndDelete(questionId);
   } catch (error) {
     throw error;
   }
