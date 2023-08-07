@@ -13,7 +13,7 @@ const getAllQuestions = async () => {
 const getOneQuestion = async (questionId) => {
   try {
     const question = await Questions.findOne({ _id: questionId });
-    console.log(question);
+
     if (!question) {
       throw {
         status: 400,
@@ -53,26 +53,16 @@ const createNewQuestion = async (newQuestion) => {
   }
 };
 
-const updateOneQuestion = (questionId, changes) => {
+const updateOneQuestion = async (questionId, changes) => {
   try {
-    const indexForUpdate = Questions.findIndex(
-      (question) => question.id === questionId
-    );
-
-    if (indexForUpdate === -1) {
-      throw {
-        status: 400,
-        message: `Can't find question with the id '${questionId}'`,
-      };
-    }
-    const updatedQuestion = {
-      ...DB.questions[indexForUpdate],
+    const update = {
       ...changes,
       updatedAt: new Date().toLocaleString("es-ES"),
     };
 
-    DB.questions[indexForUpdate] = updatedQuestion;
-    saveToDatabase(DB);
+    let updatedQuestion = await Questions.findByIdAndUpdate(questionId, update);
+
+    updatedQuestion = Questions.findOne(filter);
 
     return updatedQuestion;
   } catch (error) {
