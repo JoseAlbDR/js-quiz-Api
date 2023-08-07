@@ -56,6 +56,62 @@ module.exports = {
           },
         },
       },
+      "2XX": {
+        type: "object",
+        properties: {
+          status: {
+            type: "string",
+            example: "OK",
+          },
+          data: {
+            type: "array",
+            items: {
+              type: "Question",
+              properties: {
+                Question: {
+                  $ref: "#/components/schemas/Question",
+                },
+              },
+            },
+          },
+        },
+      },
+      "4XX": {
+        type: "object",
+        properties: {
+          status: {
+            type: "string",
+            example: "FAILED",
+          },
+          data: {
+            type: "object",
+            properties: {
+              error: {
+                type: "string",
+                example: "Some Error Message",
+              },
+            },
+          },
+        },
+      },
+      "5XX": {
+        type: "object",
+        properties: {
+          status: {
+            type: "string",
+            example: "FAILED",
+          },
+          data: {
+            type: "object",
+            properties: {
+              error: {
+                type: "string",
+                example: "Some Error Message",
+              },
+            },
+          },
+        },
+      },
     },
   },
 };
