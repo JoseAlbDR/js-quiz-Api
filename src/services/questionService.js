@@ -6,7 +6,10 @@ const getAllQuestions = async () => {
     const allQuestions = await Questions.find({});
     return allQuestions;
   } catch (error) {
-    throw { status: 500, message: error };
+    throw {
+      status: 500,
+      message: "Could not connect to Database, try again later",
+    };
   }
 };
 
@@ -62,7 +65,7 @@ const updateOneQuestion = async (questionId, changes) => {
 
     let updatedQuestion = await Questions.findByIdAndUpdate(questionId, update);
 
-    updatedQuestion = Questions.findOne(filter);
+    updatedQuestion = Questions.findById(questionId);
 
     return updatedQuestion;
   } catch (error) {
