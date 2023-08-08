@@ -56,6 +56,51 @@ module.exports = {
           },
         },
       },
+      QuestionInput: {
+        type: "object",
+        properties: {
+          question: {
+            type: "string",
+            description: "Question content",
+            example: "What's the output?",
+            required: true,
+          },
+          code: {
+            type: "string",
+            description: "Javascript code snippet for the question",
+            example: "console.log(typeof typeof 1);",
+          },
+          options: {
+            type: "array",
+            items: {
+              type: "string",
+            },
+            description: "Possible options to answer the question",
+            example: ["number", "string", "object", "undefined"],
+            required: true,
+          },
+          answer: {
+            type: "string",
+            description: "Explanation to correct answer for the question",
+            example:
+              "typeof 1 returns 'number'. typeof 'number' returns 'string'",
+            required: true,
+          },
+          points: {
+            type: "number",
+            description: "Number of points for correct answer",
+            example: 10,
+            required: true,
+          },
+          correctOption: {
+            type: "number",
+            enum: [0, 1, 2, 3],
+            description: "Option number for correct answer",
+            example: 1,
+            required: true,
+          },
+        },
+      },
       "2XX": {
         type: "object",
         properties: {
@@ -106,7 +151,8 @@ module.exports = {
             properties: {
               error: {
                 type: "string",
-                example: "Some Error Message",
+                example:
+                  "Operation `<some-operation>` buffering timed out after 10000ms",
               },
             },
           },
