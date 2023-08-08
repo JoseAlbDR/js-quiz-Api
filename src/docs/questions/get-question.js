@@ -3,6 +3,7 @@ module.exports = {
     tags: ["Questions CRUD operations"],
     description: "Get one question",
     operationId: "getOneQuestions",
+    summary: "Get One Question",
     parameters: [
       {
         name: "questionId",
@@ -13,28 +14,53 @@ module.exports = {
       },
     ],
     responses: {
-      "2XX": {
+      200: {
         description: "OK",
         content: {
           "application/json": {
             schema: {
-              $ref: "#/components/schemas/2XX",
+              type: "object",
+              properties: {
+                status: {
+                  type: "string",
+                  example: "OK",
+                },
+                data: {
+                  $ref: "#/components/schemas/Question",
+                },
+              },
             },
           },
         },
       },
-      "4XX": {
+      400: {
         description: "BAD REQUEST",
         content: {
           "application/json": {
             schema: {
-              $ref: "#/components/schemas/4XX",
+              type: "object",
+              properties: {
+                status: {
+                  type: "string",
+                  example: "FAILED",
+                },
+                data: {
+                  type: "object",
+                  properties: {
+                    error: {
+                      type: "string",
+                      example:
+                        'Cast to ObjectId failed for value "64d10ac713ba46c210a1912" (type string) at path "_id" for model "Question"',
+                    },
+                  },
+                },
+              },
             },
           },
         },
       },
-      "5XX": {
-        description: "FAILED",
+      500: {
+        description: "INTERNAL SERVER ERROR",
         content: {
           "application/json": {
             schema: {
