@@ -6,11 +6,11 @@ const deleteOneQuestion = require("./delete-question");
 
 module.exports = {
   paths: {
-    "/": {
+    "/v1/questions": {
       ...getAllQuestions,
       ...createNewQuestion,
     },
-    "/{questionId}": {
+    "/v1/questions/{questionId}": {
       ...getOneQuestion,
       ...updateOneQuestion,
       ...deleteOneQuestion,
