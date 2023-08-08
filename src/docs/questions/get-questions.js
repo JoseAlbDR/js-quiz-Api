@@ -3,9 +3,10 @@ module.exports = {
     tags: ["Questions CRUD operations"],
     description: "Get all questions",
     operationId: "getAllQuestions",
+    summary: "Get All Questions",
     parameters: [],
     responses: {
-      "2XX": {
+      200: {
         description: "OK",
         content: {
           "application/json": {
@@ -15,18 +16,8 @@ module.exports = {
           },
         },
       },
-      "4XX": {
-        description: "BAD REQUEST",
-        content: {
-          "application/json": {
-            schema: {
-              $ref: "#/components/schemas/4XX",
-            },
-          },
-        },
-      },
-      "5XX": {
-        description: "FAILED",
+      500: {
+        description: "INTERNAL SERVER ERROR",
         content: {
           "application/json": {
             schema: {
